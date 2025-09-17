@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Improvement Dashboard</title>
+    <style>
+        /* General styling for the dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+        header {
+            background-color: #2c3e50;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            width: 30%;
+        }
+        .box h3 {
+            margin-top: 0;
+        }
+        .card {
+            background-color: #3498db;
+            padding: 15px;
+            margin-bottom: 10px;
+            color: white;
+            border-radius: 8px;
+        }
+        .button {
+            background-color: #e74c3c;
+            padding: 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #c0392b;
+        }
+        /* Chart.js container */
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Robotics Improvement Dashboard</h1>
+</header>
+
+<div class="container">
+    <!-- Performance Metrics Section -->
+    <div class="box">
+        <h3>Performance Metrics</h3>
+        <div class="card">
+            <h4>Speed:</h4>
+            <p id="speed">100 m/s</p>
+        </div>
+        <div class="card">
+            <h4>Accuracy:</h4>
+            <p id="accuracy">95%</p>
+        </div>
+        <div class="card">
+            <h4>Battery Life:</h4>
+            <p id="battery">80%</p>
+        </div>
+        <button class="button" onclick="improveMetrics()">Improve Metrics</button>
+    </div>
+
+    <!-- Data Visualization Section -->
+    <div class="box">
+        <h3>Data Visualization</h3>
+        <div class="chart-container">
+            <canvas id="roboticsChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Control Section -->
+    <div class="box">
+        <h3>Control Settings</h3>
+        <div class="card">
+            <h4>Motor Speed:</h4>
+            <input type="range" id="motorSpeed" min="0" max="100" value="50" oninput="updateSpeedValue(this.value)">
+            <p>Speed: <span id="speedValue">50</span>%</p>
+        </div>
+        <div class="card">
+            <h4>Sensor Calibration:</h4>
+            <button class="button" onclick="calibrateSensors()">Calibrate</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer style="text-align: center; padding: 20px; background-color: #2c3e50; color: white;">
+    <p>&copy; 2025 Robotics Inc. | All Rights Reserved</p>
+</footer>
+
+<!-- JavaScript Section -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Initialize chart for data visualization
+    const ctx = document.getElementById('roboticsChart').getContext('2d');
+    const roboticsChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['0', '1', '2', '3', '4', '5'],
+            datasets: [{
+                label: 'Robotics Performance Over Time',
+                data: [10, 15, 25, 30, 45, 50],
+                borderColor: '#3498db',
+                fill: false,
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Time (s)'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Performance'
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Simulate improving the metrics (speed, accuracy, battery)
+    function improveMetrics() {
+        document.getElementById('speed').innerText = '110 m/s';
+        document.getElementById('accuracy').innerText = '98%';
+        document.getElementById('battery').innerText = '85%';
+        updateChartData();
+    }
+
+    // Update chart data (simulate performance improvement)
+    function updateChartData() {
+        roboticsChart.data.datasets[0].data = [10, 20, 30, 40, 60, 70];
+        roboticsChart.update();
+    }
+
+    // Update motor speed value from the slider
+    function updateSpeedValue(value) {
+        document.getElementById('speedValue').innerText = value;
+    }
+
+    // Simulate sensor calibration
+    function calibrateSensors() {
+        alert("Sensors calibrated successfully!");
+    }
+</script>
+
+</body>
+</html>
